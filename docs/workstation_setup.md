@@ -43,7 +43,7 @@ they are **not** required by Azure or Cosmos DB or the Microsoft SDKs.
 Use the tools you prefer.  I like using the following:
 
 - [Visual Studio Code (VSC)](https://code.visualstudio.com/)
-  - This is my default editor; it's excellend for Python and TypeScript.
+  - This is my default editor; it's excellent for Python and TypeScript.
 - [JetBrains IntelliJ Java IDE](https://www.jetbrains.com/idea/)
 - [JetBrains PyCharm Python IDE](https://www.jetbrains.com/pycharm/)
 - [GitHub CoPilot](https://github.com/features/copilot)
@@ -126,6 +126,13 @@ C:\Users\chjoakim\AppData\Roaming\npm
 +-- nodemon@3.1.0
 `-- typescript@5.4.3
 ```
+
+**TypeScript is a strongly typed programming language that "transpiles" into JavaScript**.
+It looks similar to Java or C#.
+The strong-typing leads to better IDE support, and better software quality.
+
+The strong-typing is removed during the transpilation process, so that your code
+runs as regular JavaScript in the **Node.js** or other runtime environment.
 
 ---
 

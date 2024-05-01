@@ -1,2 +1,2 @@
-# NoSQL Java
+# Cosmos DB NoSQL with Java
 

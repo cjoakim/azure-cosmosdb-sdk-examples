@@ -1,2 +1,2 @@
-# vCore Python
+# Cosmos DB Mongo vCore with Python
 

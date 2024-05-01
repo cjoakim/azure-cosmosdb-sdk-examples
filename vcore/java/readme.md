@@ -1,2 +1,2 @@
-# vCore Java
+# Cosmos DB Mongo vCore with Java
 

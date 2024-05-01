@@ -1,2 +1,2 @@
-# vCore DotNet
+# Cosmos DB Mongo vCore with DotNet
 

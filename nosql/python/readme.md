@@ -1,4 +1,4 @@
-# NoSQL Python
+# Cosmos DB NoSQL with Python
 
 ## Links
 

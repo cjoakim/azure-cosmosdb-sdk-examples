@@ -1,2 +1,2 @@
-# NoSQL DotNet
+# Cosmos DB NoSQL with DotNet
 

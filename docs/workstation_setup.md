@@ -157,6 +157,20 @@ O'Reilly Media books on Python are generally excellent, IMO.
 
 Be sure to focus on Python 3, not the older Python 2.
 
+### How is Python formatted?
+
+**Correct indentation matters!** - otherwise the program will throw an error when executed.
+
+I use the **black** library to automatically reformat my code:
+
+```
+> black .\main.py
+reformatted main.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+```
+
 ### Where are Python Packages Hosted and Downloaded From?
 
 [PyPi - the Python Package Index](https://pypi.org/)
@@ -179,6 +193,7 @@ Jinja2
 azure-cosmos
 azure-identity
 azure-storage-blob
+black
 docopt
 levenshtein
 matplotlib

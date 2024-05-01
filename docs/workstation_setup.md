@@ -18,9 +18,25 @@ in a PowerShell terminal:
 [Environment]::SetEnvironmentVariable("AZURE_COSMOSDB_EMULATOR_KEY", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==", "User")
 ```
 
-TODO - list my standard env vars here
+The environment variables used in this repo all begin with
+**AZURE_**, for example:
 
+```
+AZURE_COSMOSDB_NOSQL_ACCT
+AZURE_COSMOSDB_NOSQL_URI
+AZURE_COSMOSDB_NOSQL_CONN_STRING1
+AZURE_COSMOSDB_NOSQL_RO_KEY1
+AZURE_COSMOSDB_NOSQL_RW_KEY1
 
+AZURE_COSMOSDB_MONGO_VCORE_CONN_STR
+AZURE_COSMOSDB_MONGO_VCORE_PASS
+AZURE_COSMOSDB_MONGO_VCORE_USER
+```
+
+Note: These environment variable names are my personal conventions;
+they are **not** required by Azure or Cosmos DB or the Microsoft SDKs.
+
+---
 
 ## Tools - IDEs, etc
 
@@ -36,6 +52,8 @@ Use the tools you prefer.  I like using the following:
 - [Azure Data Studio](https://azure.microsoft.com/en-us/products/data-studio)
   - Desktop explorer for Azure SQL, Azure PostgreSQL, and Cosmos DB vCore 
 
+---
+
 ## DotNet
 
 See https://dotnet.microsoft.com/en-us/download
@@ -50,6 +68,8 @@ Welcome to .NET 8.0!
 SDK Version: 8.0.204
 ```
 
+---
+
 ## Java
 
 See https://learn.microsoft.com/en-us/java/openjdk/download
@@ -62,6 +82,15 @@ openjdk version "17.0.10" 2024-01-16 LTS
 OpenJDK Runtime Environment Microsoft-8902769 (build 17.0.10+7-LTS)
 OpenJDK 64-Bit Server VM Microsoft-8902769 (build 17.0.10+7-LTS, mixed mode, sharing)
 ```
+
+This repo uses [Gradle](https://gradle.org/) rather than
+[Apache Maven](https://maven.apache.org/) as the java project-management tool
+as I feel that it's much simpler and less verbose.
+
+See the **Gradle installation instructions** here:
+https://gradle.org/install/
+
+---
 
 ## Python
 
@@ -79,6 +108,8 @@ is used rather than Python distributions such as **Anaconda/Conda**.
 
 Please see the section below called **Learning Python** if you're
 not yet fluent in Python.
+
+---
 
 ## TypeScript and Node.js
 
@@ -100,9 +131,9 @@ C:\Users\chjoakim\AppData\Roaming\npm
 
 ## Learning Python
 
-I recommend learning Python to both my customers for these reasons:
-- It is one of the top three programming languages at this time (2024)
-- It is applicable to a very wide range of workloads, such as:
+I recommend learning Python to both my customers and peers for these reasons:
+- It's one of the top three programming languages at this time (2024)
+- It's applicable to a very wide range of workloads, such as:
   - Ad-hoc scripting
   - DevOps and Infrastructure
   - Application Development
@@ -121,13 +152,9 @@ Be sure to focus on Python 3, not the older Python 2.
 
 ### Where are Python Packages Hosted and Downloaded From?
 
-**PyPI** (i.e. - Python Package Index)
-
-See https://pypi.org/
+[PyPi - the Python Package Index](https://pypi.org/)
 
 ### Python Virtual Environments
-
-https://docs.python.org/3/library/venv.html
 
 A **Python Virtual Environment** (i.e. - a venv) is a combination of
 a set of python libraries and a version of python.  Venvs are used
@@ -138,7 +165,31 @@ Python has a **venv** functionality as part of its' **standard library**;
 see https://docs.python.org/3/library/venv.html
 
 A **requirements file** is used to specify the list of libraries
-for a given Python virtual environment.
+for a given Python virtual environment.  This is an example:
+
+```
+Jinja2
+azure-cosmos
+azure-identity
+azure-storage-blob
+docopt
+levenshtein
+matplotlib
+openai
+pandas
+plotly
+psutil
+pylint
+pytest==7.3.2
+pytest-cov
+python-dotenv
+pytz
+redis
+requests
+scikit-learn
+scipy
+tiktoken>=0.4.0
+```
 
 In this repo, I consistently use these three filenames:
 
@@ -172,5 +223,5 @@ and Mac/Linux, respectively:
 ```
 
 This Python venv concept is very similar to other programming
-ecosystems.  Each has their own way to specify dependencies/requirements
-and has an Internet-hosted library repository.
+ecosystems.  Each has their own way to specify dependencies/requirements,
+has an Internet-hosted library repository, and has tools to install them.

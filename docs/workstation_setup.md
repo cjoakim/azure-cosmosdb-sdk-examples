@@ -74,6 +74,12 @@ I currently use this version of Python:
 Python 3.12.3
 ```
 
+The Python projects in this repo assume that **standard python**
+is used rather than Python distributions such as **Anaconda/Conda**.
+
+Please see the section below called **Learning Python** if you're
+not yet fluent in Python.
+
 ## TypeScript and Node.js
 
 See https://nodejs.org/en and https://www.typescriptlang.org/.
@@ -89,3 +95,82 @@ C:\Users\chjoakim\AppData\Roaming\npm
 +-- nodemon@3.1.0
 `-- typescript@5.4.3
 ```
+
+---
+
+## Learning Python
+
+I recommend learning Python to both my customers for these reasons:
+- It is one of the top three programming languages at this time (2024)
+- It is applicable to a very wide range of workloads, such as:
+  - Ad-hoc scripting
+  - DevOps and Infrastructure
+  - Application Development
+  - Data Science
+  - Apache Spark "big data" processing with the PySpark syntax
+- It's an easy to learn language
+- It's Object-Oriented
+- It's cross-platform; same code runs on Windows/Linux/Mac
+
+This is a good tutorial:
+https://docs.python.org/3/tutorial/index.html
+
+O'Reilly Media books on Python are generally excellent, IMO.
+
+Be sure to focus on Python 3, not the older Python 2.
+
+### Where are Python Packages Hosted and Downloaded From?
+
+**PyPI** (i.e. - Python Package Index)
+
+See https://pypi.org/
+
+### Python Virtual Environments
+
+https://docs.python.org/3/library/venv.html
+
+A **Python Virtual Environment** (i.e. - a venv) is a combination of
+a set of python libraries and a version of python.  Venvs are used
+so that you can have multiple Python projects on your system
+and they won't conflict with each other.
+
+Python has a **venv** functionality as part of its' **standard library**;
+see https://docs.python.org/3/library/venv.html
+
+A **requirements file** is used to specify the list of libraries
+for a given Python virtual environment.
+
+In this repo, I consistently use these three filenames:
+
+- **requirements.in** - a simple text file specififying the required libraries
+- **venv.ps1** - Windows PowerShell script to create the venv
+- **venv.sh** - Mac OS or Linux bash script to create the venv
+ 
+The **venv.ps1/sh** scripts first "compile" the requirements.in file,
+resolve any version discrepancies, and create the **requirements.txt** file.
+
+The virtual environment is then created, within the script, with this command:
+
+```
+pip install -q -r .\requirements.txt
+```
+
+**pip** is another tool in the Python ecosystem.  It installs libraries.
+See https://docs.python.org/3/installing/index.html
+
+Creation of the venv is a "one time" activity.  You don't need to re-install
+it unless your requirements file has changed.
+
+However, each time you navigate into the directory where the venv exists
+you must **activate** it.  These are the commands to do that in Windows
+and Mac/Linux, respectively:
+
+```
+>.\venv\Scripts\Activate.ps1    <--- In Windows PowerShell terminal
+
+> venv/bin/activate             <--- In bash terminal on Mac OS and Linux
+```
+
+This Python venv concept is very similar to other programming
+ecosystems.  Each has their own way to specify dependencies/requirements
+and has an Internet-hosted library repository.

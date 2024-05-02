@@ -1,11 +1,10 @@
-""" module cosmos.py, Chris Joakim, Microsoft, 2023 """
+""" module cosmos.py, Chris Joakim, Microsoft, 2024 """
 
 import traceback
 
 from azure.cosmos import cosmos_client
 from azure.cosmos import diagnostics
 from azure.cosmos import exceptions
-# from azure.cosmos import partition_key
 
 class Cosmos():
     """

@@ -1,11 +1,12 @@
 """
 Usage:
-  python main.py <func>
+  python psycopg_example.py <func>
   -
-  python main.py check_environment_variables
+  python psycopg_example.py check_environment_variables
   -
-  python main.py psycopg2_example <envname> <dbname>
-  python main.py psycopg2_example cosmos citus
+  python psycopg_example.py psycopg_example <envname> <dbname>
+  python psycopg_example.py psycopg_example local postgres
+  python psycopg_example.py psycopg_example cosmos citus
 Options:
   -h --help     Show this screen.
   --version     Show version.
@@ -20,51 +21,52 @@ import traceback
 
 from docopt import docopt
 
-import psycopg2
-from psycopg2 import pool
+import psycopg
+#from psycopg import pool
 
-from pysrc.minbundle import Bytes, Counter, Env, FS, Storage, System
+from pysrc.util.counter import Counter
+from pysrc.util.fs import FS 
+from pysrc.util.template import Template
 
-EXPECTED_EMBEDDINGS_ARRAY_LENGTH = 1536
 
-class PostgreSqlClient(object):
+class PGClient(object):
 
     def __init__(self, envname, dbname):
         self.envname = envname
         self.dbname  = dbname
-        self.pgpool  = None
         self.conn    = None
         self.cursor  = None
 
         # default to 'localhost'
         host     = "localhost"
-        user     = os.environ['USERNAME']
+        user     = os.environ['LOCAL_PG_USER']
         password = os.environ['LOCAL_PG_PASS']
         sslmode  = ""
 
         if envname == 'flex':
-            host     = os.environ['AZURE_PG_SERVER_FULL_NAME']
-            user     = os.environ['AZURE_PG_USER']
-            password = os.environ['AZURE_PG_PASS']
+            host     = os.environ['AZURE_FLEX_PG_SERVER']
+            user     = os.environ['AZURE_FLEX_PG_USER']
+            password = os.environ['AZURE_FLEX_PG_PASS']
             sslmode  = "sslmode=require"
         elif envname == 'cosmos':
-            host     = os.environ['AZURE_COSMOSDB_PG_SERVER_FULL_NAME']
-            user     = os.environ['AZURE_COSMOSDB_PG_ADMIN_ID']
-            password = os.environ['AZURE_COSMOSDB_PG_ADMIN_PW']
+            host     = os.environ['AZURE_COSMOSDB_PG_FQNAME']
+            user     = os.environ['AZURE_COSMOSDB_PG_USER']
+            password = os.environ['AZURE_COSMOSDB_PG_PASS']
             sslmode  = "sslmode=require"
 
+        print("PGClient#init - envname: {}, dbname: {}, host: {}".format(
+            envname, dbname, host))
+
         # Build a connection string from the variables
-        self.conn_string = "host={} user={} dbname={} password={} {}".format(
+        conn_string = "host={} user={} dbname={} password={} {}".format(
             host, user, dbname, password, sslmode)
-
-        self.pgpool = psycopg2.pool.SimpleConnectionPool(1, 20, self.conn_string)
-        if (self.pgpool != None):
-            print("Connection pool created")
-
-        # Use getconn() to get a connection from the connection pool
-        self.conn = self.pgpool.getconn()
+        #print("PGClient#init - conn_string: {}".format(conn_string))
+        
+        self.conn = psycopg.connect(conninfo=conn_string)  # ("dbname=test user=postgres")
         if (self.conn != None):
-            print("Connection created")
+            print("PGClient#init - connection created")
+        else:
+            print("PGClient#init - ERROR: connection NOT created")
 
     def get_cursor(self):
         self.cursor = self.conn.cursor()
@@ -74,10 +76,11 @@ class PostgreSqlClient(object):
         """ commit the cursor and close the db connection, if they exist """
         if (self.cursor != None):
             self.cursor.close()
+            print("PGClient#close - cursor closed")
         if (self.conn != None):
             self.conn.commit()
             self.conn.close()
-            print("Connection closed")
+            print("PGClient#close - connection closed")
 
 
 def print_options(msg=None):
@@ -87,23 +90,23 @@ def print_options(msg=None):
     print(arguments)
 
 def check_environment_variables():
-    home = Env.var('USERNAME')
+    home = os.environ['USERNAME']
     env_vars = [
         'USERNAME',
+        'LOCAL_PG_USER',
         'LOCAL_PG_PASS',
-        'AZURE_PG_SERVER_FULL_NAME',
-        'AZURE_PG_USER',
-        'AZURE_PG_PASS',
-        'AZURE_COSMOSDB_PG_ADMIN_ID',
-        'AZURE_COSMOSDB_PG_ADMIN_PW',
-        'AZURE_COSMOSDB_PG_SERVER_FULL_NAME'
+        'AZURE_FLEX_PG_SERVER',
+        'AZURE_FLEX_PG_USER',
+        'AZURE_FLEX_PG_PASS',
+        'AZURE_COSMOSDB_PG_USER',
+        'AZURE_COSMOSDB_PG_PASS'
     ]
     for env_var in env_vars:
-        print('check_env, {}: {}'.format(env_var, str(Env.var(env_var))))
+        print('check_env, {}: {}'.format(env_var, os.environ[env_var]))
 
-def psycopg2_example(envname, dbname):
-    print('psycopg2_example')
-    client = PostgreSqlClient(envname, dbname)
+def psycopg_example(envname, dbname):
+    print('psycopg_example')
+    client = PGClient(envname, dbname)
     cursor = client.get_cursor()
 
     # Drop previous table of same name if one exists
@@ -133,8 +136,8 @@ if __name__ == "__main__":
         func = sys.argv[1].lower()
         if func == 'check_environment_variables':
             check_environment_variables()
-        elif func == 'psycopg2_example':
+        elif func == 'psycopg_example':
             envname, dbname = sys.argv[2], sys.argv[3]
-            psycopg2_example(envname, dbname)
+            psycopg_example(envname, dbname)
         else:
             print_options('Error: invalid function: {}'.format(func))

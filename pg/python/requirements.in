@@ -8,6 +8,8 @@ black
 docopt
 httpx
 psutil
-psycopg2
+psycopg[binary,pool]
 pytest
 pytest-cov
+
+# Note: https://pypi.org/project/psycopg/ is the modern replacement for psycopg2

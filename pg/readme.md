@@ -43,7 +43,7 @@ AZURE_FLEX_PG_SERVER       gbbchris.postgres.database.azure.com
 AZURE_FLEX_PG_USER         chjoakim
 AZURE_FLEX_PG_PASS         <secret>
 
-AZURE_COSMOSDB_PG_FQNAME   c-gbbchris.5rmXl6v48ge55r.postgres.cosmos.azure.com
+AZURE_COSMOSDB_PG_SERVER   c-gbbchris.5rmXl6v48ge55r.postgres.cosmos.azure.com
 AZURE_COSMOSDB_PG_USER     citus
 AZURE_COSMOSDB_PG_PASS     <secret>
 ```

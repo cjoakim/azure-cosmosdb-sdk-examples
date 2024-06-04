@@ -22,7 +22,6 @@ import traceback
 from docopt import docopt
 
 import psycopg
-#from psycopg import pool
 
 from pysrc.util.counter import Counter
 from pysrc.util.fs import FS 

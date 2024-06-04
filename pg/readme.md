@@ -1,4 +1,9 @@
-## Azure Cosmos DB PostgreSQL API 
+## Azure Cosmos DB PostgreSQL API, and PostgreSQL Flex
+
+This directory contains examples for PostgreSQL, including:
+- PostgreSQL on localhost
+- Azure Database for PostgreSQL
+- Azure Cosmos DB for PostgreSQL
 
 ## Documentation
 

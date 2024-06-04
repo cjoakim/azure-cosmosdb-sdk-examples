@@ -7,10 +7,24 @@ This directory contains examples for PostgreSQL, including:
 
 ## Documentation
 
+
+
+### Cosmos DB PostgreSQL
+
+- https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/introduction
+
 - https://docs.citusdata.com/en/v11.3/develop/integrations.html#differences-from-single-node-postgresql
+
 - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/quickstart-app-stacks-python
+
 - https://devblogs.microsoft.com/cosmosdb/auto-scaling-azure-cosmos-db-for-postgresql-with-citus-grafana-azure-functions/
 
+
+### Python and psycopg (aka - psycopg3)
+
+- psycopg is the replacement for psycopg2
+- https://pypi.org/project/psycopg/
+- https://www.psycopg.org/psycopg3/docs/api/
 
 ---
 
@@ -86,4 +100,27 @@ command          description
 \x off           Turn off mysql-like \G output
 
 (END) simply use ‘q’ to quit the viewing and came back to the prompt.
+```
+
+---
+
+## Azure Cosmos DB for PostgreSQL 
+
+Show the PG version.
+
+```
+citus=> SHOW server_version;
+          server_version
+----------------------------------
+ 16.3 (Ubuntu 16.3-1.pgdg20.04+1)
+(1 row)
+```
+
+Initially there are no distributed tables.
+
+```
+citus=> SELECT * FROM citus_tables;
+ table_name | citus_table_type | distribution_column | colocation_id | table_size | shard_count | table_owner | access_method
+------------+------------------+---------------------+---------------+------------+-------------+-------------+---------------
+(0 rows)
 ```

@@ -1,0 +1,13 @@
+# This file lists the Python libraries used in the virtual enviroment.
+# See the venv.ps1 and venv.sh scripts in this directory.
+# Python 3.12.x is recommended;
+# Chris Joakim, Microsoft
+
+Jinja2
+black
+docopt
+httpx
+psutil
+psycopg2
+pytest
+pytest-cov

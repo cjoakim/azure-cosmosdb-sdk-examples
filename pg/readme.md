@@ -7,6 +7,10 @@ This directory contains examples for PostgreSQL, including:
 
 ## Documentation
 
+### Flex
+
+- https://learn.microsoft.com/en-us/azure/postgresql/
+
 
 
 ### Cosmos DB PostgreSQL
@@ -18,6 +22,34 @@ This directory contains examples for PostgreSQL, including:
 - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/quickstart-app-stacks-python
 
 - https://devblogs.microsoft.com/cosmosdb/auto-scaling-azure-cosmos-db-for-postgresql-with-citus-grafana-azure-functions/
+
+
+### Cosmos DB PostgreSQL - Best Practices
+
+
+#### Scaling
+
+
+#### CDC
+
+- Fabric Mirroring 
+
+- FLEX: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical
+  via https://github.com/2ndQuadrant/pglogical
+
+- FLEX/STD: CREATE PUBLICATION newpub FOR TABLE public.users;
+
+https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical
+
+
+#### PgBouncer
+
+- "Managed PgBouncer"
+  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-connection-pool
+  - It supports up to 2,000 simultaneous client connections.
+  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-parameters#managed-pgbouncer-parameters
+
+  
 
 
 ### Python and psycopg (aka - psycopg3)

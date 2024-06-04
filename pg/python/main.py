@@ -59,6 +59,10 @@ def load_baseball_players(envname, dbname):
             'dbname': dbname,
             'autocommit': True
         }
+        if envname == 'cosmos':
+            opts['port'] = '6432'  # pgbouncer
+        print(f'opts: {opts}')
+
         client = PGClient(opts)
         cursor = client.get_cursor()
         columns_list = [
@@ -135,6 +139,10 @@ def load_baseball_batters(envname, dbname):
             'dbname': dbname,
             'autocommit': True
         }
+        if envname == 'cosmos':
+            opts['port'] = '6432'  # pgbouncer
+        print(f'opts: {opts}')
+        
         client = PGClient(opts)
         cursor = client.get_cursor()
         columns_list = [

@@ -17,12 +17,13 @@ class PGClient(object):
         Establish a connection to a PostgreSQL database per the
         environment variables associated with the given environment name
         and database name.  These self-explanatory keys may be in the opts:
-        - envname
+        - envname    (logical name of the environment - local, flex, or cosmos)
         - dbname
         - host
         - user
-        - pass
-        - sslmode
+        - pass       (password)
+        - sslmode    (a value such as either an empty string "" or "sslmode=require")
+        - port       (default is 5432, specify a value such as 6432 for pgbouncer)
 
         If 'envname' is provided, then the host, user, pass, and sslmode
         will be derived given that value. 
@@ -33,6 +34,7 @@ class PGClient(object):
         user     = self._opt("user", opts)
         password = self._opt("pass", opts)
         sslmode  = self._opt("sslmode", opts)
+        port     = self._opt("port", opts)
         autocommit = False
         if "autocommit" in opts:
             autocommit = opts["autocommit"]
@@ -59,9 +61,13 @@ class PGClient(object):
             print("PGClient#init - envname: {}, dbname: {}, host: {}".format(
                 envname, dbname, host))
 
-            conn_string = "host={} user={} dbname={} password={} {}".format(
-                host, user, dbname, password, sslmode)
-            #print("PGClient#init - conn_string: {}".format(conn_string))
+            if port is not None:
+                conn_string = "host={} port={} user={} dbname={} password={} {}".format(
+                    host, port, user, dbname, password, sslmode)
+            else:
+                conn_string = "host={} user={} dbname={} password={} {}".format(
+                    host, user, dbname, password, sslmode)
+            print("PGClient#init - conn_string: {}".format(conn_string))
             
             self.conn = psycopg.connect(
                 conninfo=conn_string,

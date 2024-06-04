@@ -3,7 +3,7 @@
 # Chris Joakim, Microsoft
 
 # Usage:
-# > .\baseball_deldef.ps1 local postgres > tmp\local_baseball_deldef.txt
+# > .\baseball_deldef.ps1 local postgres
 # > .\baseball_deldef.ps1 flex postgres > tmp\flex_baseball_deldef.txt
 # > .\baseball_deldef.ps1 cosmos citus > tmp\cosmos_baseball_deldef.txt
 

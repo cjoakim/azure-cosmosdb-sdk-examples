@@ -2,7 +2,9 @@ import os
 import sys
 import traceback
 
+
 import psycopg
+from psycopg import connect, ClientCursor
 
 # This class is used to interact with a PostgreSQL database, such as
 # Azure Cosmos DB for PostgreSQL or Azure Database for PostgreSQL.
@@ -10,29 +12,33 @@ import psycopg
 
 class PGClient(object):
 
-    def __init__(self, envname, dbname, override_opts: dict = None):
+    def __init__(self, opts: dict = {}):
         """
         Establish a connection to a PostgreSQL database per the
         environment variables associated with the given environment name
-        and database name.
-        
-        However, the optional 'override_opts' parameter may be used to pass
-        in the connection options directly.  The required keys are:
-        host, user, dbname, password, and sslmode.
+        and database name.  These self-explanatory keys may be in the opts:
+        - envname
+        - dbname
+        - host
+        - user
+        - pass
+        - sslmode
+
+        If 'envname' is provided, then the host, user, pass, and sslmode
+        will be derived given that value. 
         """
-        self.envname = envname
-        self.dbname  = dbname
-        self.conn    = None
-        self.cursor  = None
+        envname  = self._opt("envname", opts)
+        dbname   = self._opt("dbname", opts)
+        host     = self._opt("host", opts)
+        user     = self._opt("user", opts)
+        password = self._opt("pass", opts)
+        sslmode  = self._opt("sslmode", opts)
+        autocommit = False
+        if "autocommit" in opts:
+            autocommit = opts["autocommit"]
 
         try:
-            if override_opts is not None:
-                host = override_opts['host']
-                user = override_opts['user']
-                dbname = override_opts['dbname']
-                password = override_opts['password']
-                sslmode = override_opts['sslmode']
-            else:
+            if envname is not None:
                 if envname == 'flex':
                     host     = os.environ['AZURE_FLEX_PG_SERVER']
                     user     = os.environ['AZURE_FLEX_PG_USER']
@@ -57,7 +63,11 @@ class PGClient(object):
                 host, user, dbname, password, sslmode)
             #print("PGClient#init - conn_string: {}".format(conn_string))
             
-            self.conn = psycopg.connect(conninfo=conn_string)  # ("dbname=test user=postgres")
+            self.conn = psycopg.connect(
+                conninfo=conn_string,
+                cursor_factory=ClientCursor,
+                autocommit=autocommit)
+            
             if (self.conn != None):
                 print("PGClient#init - connection created")
             else:
@@ -70,12 +80,25 @@ class PGClient(object):
         self.cursor = self.conn.cursor()
         return self.cursor
 
+    def commit(self):
+        if self.cursor != None:
+            self.cursor.close()
+        if self.conn != None:
+            self.conn.commit()
+    
     def close(self) -> None:
         """ close the cursor and commit/close the db connection, if they exist """
-        if (self.cursor != None):
+        if self.cursor != None:
             self.cursor.close()
             print("PGClient#close - cursor closed")
-        if (self.conn != None):
+        if self.conn != None:
             self.conn.commit()
             self.conn.close()
             print("PGClient#close - connection closed")
+
+    def _opt(self, name, opts):
+        if name in opts:
+            return opts[name]
+        else:
+            return None
+        

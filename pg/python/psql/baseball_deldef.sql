@@ -22,8 +22,9 @@ create table players (
   total_games          INTEGER,
   teams_data           jsonb,
   pitching_data        jsonb,
-  batting_data         jsonb,
-  embeddings_str       VARCHAR(255)
+  batting_data         jsonb
+
+  -- embeddings_str       VARCHAR(255)
   -- embeddings           vector(1536)
 );
 
@@ -65,6 +66,7 @@ create table batters (
   so_avg               NUMERIC(16, 12),
   ibb_avg              NUMERIC(16, 12),
   hbp_avg              NUMERIC(16, 12),
-  sb_pct               NUMERIC(16, 12),
-  embeddings_str       VARCHAR(255)
+  sb_pct               NUMERIC(16, 12)
+
+  -- embeddings_str       VARCHAR(255)
 );

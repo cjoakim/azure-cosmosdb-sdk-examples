@@ -47,7 +47,12 @@ def check_environment_variables():
 
 def psycopg_example(envname, dbname):
     print('psycopg_example')
-    client = PGClient(envname, dbname)
+    opts = {
+        'envname': envname,
+        'dbname': dbname,
+        'autocommit': True
+    }
+    client = PGClient(opts)
     cursor = client.get_cursor()
 
     # Drop previous table of same name if one exists

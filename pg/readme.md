@@ -5,13 +5,27 @@ This directory contains examples for PostgreSQL, including:
 - Azure Database for PostgreSQL
 - Azure Cosmos DB for PostgreSQL
 
+---
+
 ## Documentation
 
-### Flex
+### PostgreSQL
+
+- https://www.postgresql.org/docs/current/index.html
+- https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-A4.pdf
+
+- https://airbyte.com/data-engineering-resources/postgresql-extensions
+- https://www.bytebase.com/blog/top-postgres-extension/
+- https://gist.github.com/joelonsql/e5aa27f8cc9bd22b8999b7de8aee9d47
+- https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-extensions
+
+---
+
+### Azure Database for PostgreSQL - Flexible Server
 
 - https://learn.microsoft.com/en-us/azure/postgresql/
 
-
+---
 
 ### Cosmos DB PostgreSQL
 
@@ -50,8 +64,6 @@ https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logi
   - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-parameters#managed-pgbouncer-parameters
 
   
-
-
 ### Python and psycopg (aka - psycopg3)
 
 - psycopg is the replacement for psycopg2

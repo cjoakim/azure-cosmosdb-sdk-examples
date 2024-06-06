@@ -24,6 +24,9 @@ This directory contains examples for PostgreSQL, including:
 ### Azure Database for PostgreSQL - Flexible Server
 
 - https://learn.microsoft.com/en-us/azure/postgresql/
+- https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-scaling-resources
+- https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions
+- https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-pgbouncer
 
 ---
 
@@ -40,13 +43,51 @@ This directory contains examples for PostgreSQL, including:
 
 ### Cosmos DB PostgreSQL - Best Practices
 
+- PgBouncer, CDC, Scaling
 
+#### PgBouncer
+
+PgBouncer is a server-side connection pooler.
+The PostgreSQL default port is 5432, but 6432 for PgBouncer.
+
+```
+postgres://citus:{password}@{server}.postgres.cosmos.azure.com:5432/citus?sslmode=require
+postgres://citus:{password}@{server}.postgres.cosmos.azure.com:6432/citus?sslmode=require
+```
+
+295 default connections
+Use connection pooling in one way or the other
+
+
+- "Managed PgBouncer"
+  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-connection-pool
+  - It supports up to 2,000 simultaneous client connections.
+  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-parameters#managed-pgbouncer-parameters
+
+  
 #### Scaling
+
+- It's a Manual process
+- Add worker nodes, then rebalance.
+- For each distributed table?
+- Can rebalancing be done from the UI?
+
+```
+SELECT rebalance_table_shards('distributed_table_name');
+```
+
+Do a quarterly eval
+
+Can't scale IN!  Can scale out.
+
+
 
 
 #### CDC
 
-- Fabric Mirroring 
+- None currently
+- Fabric Mirroring? 
+- Use a Publication?
 
 - FLEX: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical
   via https://github.com/2ndQuadrant/pglogical
@@ -56,14 +97,17 @@ This directory contains examples for PostgreSQL, including:
 https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-logical
 
 
-#### PgBouncer
+Native logical replication and pg replication.
+Transaction logs, write-ahead.
+Can do Publicatons in Flex.  But NOT in CPG.
+Striim can be used with Flex but NOT CPG.  (replication slots)
+Debizum 
+replication slots in PG.  orphan slots eventually consume all disk space.
+pgvaccum 
+Monitor for disk space, if > 80% to catch this situation
 
-- "Managed PgBouncer"
-  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-connection-pool
-  - It supports up to 2,000 simultaneous client connections.
-  - https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-parameters#managed-pgbouncer-parameters
+pgdump to blob storage, or ADF or Striim (online)
 
-  
 ### Python and psycopg (aka - psycopg3)
 
 - psycopg is the replacement for psycopg2

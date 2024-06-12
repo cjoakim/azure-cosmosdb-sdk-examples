@@ -50,7 +50,7 @@ Configure Cosmos DB to sent its' telemetry to an Azure Monitor instance
 
 
 Notes:
-- The **Query Text** is excluded by default, but can be enable.
+- The **Query Text** is excluded by default, but can be enabled.
 - **KQL (Kusto Query Language)** is a skill worth learning for DBAs, IMO
 - New Book: The Definitive Guide to KQL
   - https://www.microsoftpressstore.com/store/definitive-guide-to-kql-using-kusto-query-language-9780138293383

@@ -56,6 +56,10 @@ Notes:
   - https://www.microsoftpressstore.com/store/definitive-guide-to-kql-using-kusto-query-language-9780138293383
 
 
+<p align="center">
+  <img src="img/kql-book.jpg" width="40%">
+</p>
+
 ---
 
 ## Per-Partition Per-Region Autoscale

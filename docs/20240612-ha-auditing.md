@@ -57,7 +57,7 @@ Notes:
 
 
 <p align="center">
-  <img src="img/kql-book.jpg" width="40%">
+  <img src="img/kql-book.jpg" width="25%">
 </p>
 
 ---

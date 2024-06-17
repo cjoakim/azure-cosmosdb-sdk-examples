@@ -7,6 +7,9 @@
 ### Citus
 
 - https://docs.citusdata.com/en/v12.1/sharding/data_modeling.html
+- https://docs.citusdata.com/en/v11.0/develop/api_metadata.html#coordinator-metadata
+- https://docs.citusdata.com/en/v12.1/
+- https://www.citusdata.com/faq
 
 ### Cosmos DB PostgreSQL
 
@@ -25,6 +28,9 @@
 - See the above Citus docs on best practices:
   - **Partition distributed tables by a common tenant_id column**
     - data is horizontally scaled/partitioned
+    - high cardinality
+    - even distribution
+    - do not choose a date or timestamp as the distribution column
   - **Convert small cross-tenant tables to reference tables**
     - these are distributed/copied to all nodes in the cluster
   - **Restrict filter all application queries by tenant_id**
@@ -39,7 +45,12 @@ create_reference_table("<tablename>")
 select rebalance_shards("<tablename>")
 ```
 
-## Star Schema
+---
+
+## Other Topics
+
+### Star Schema
 
 - Single Fact Table
 - Related Dimension Tables 
+- https://www.databricks.com/glossary/star-schema

@@ -21,13 +21,21 @@ There's no universal rule or formula for all workloads.
 References:
 - [Pick initial size for cluster](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/howto-scale-initial)
 
-> The vCore count is actually the only decision.
-> RAM allocation is currently determined based on vCore count
+> "The vCore count is actually the only decision.
+> RAM allocation is currently determined based on vCore count"
 
 Configuration example from Azure Portal:
 
 <p align="center">
-  <img src="img/cpg-nodes-and-ram.png" width="40%">
+  <img src="img/cpg-nodes-and-ram.png" width="30%">
+</p>
+
+<pre>
+
+</pre>
+
+<p align="center">
+  <img src="img/cpg-storage-per-worker.png" width="30%">
 </p>
 
 ---

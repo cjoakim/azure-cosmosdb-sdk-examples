@@ -2,6 +2,8 @@
 
 ### Previous Questions
 
+---
+
 #### 1) Scale out vs Scale up guidance.
 
 **For a Postgres workload, RAM is the key factor.**
@@ -14,10 +16,19 @@ Usually you **start with somewhat smaller spec for your cluster** than you belie
 
 **Then you observe what is exactly reaching 90-100% of utilization (e.g. compute) and scale up that part to repeat the performance runs.**
 
-There’s no universal rule or formula for all workloads.
+There's no universal rule or formula for all workloads.
 
 References:
 - [Pick initial size for cluster](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/howto-scale-initial)
+
+> The vCore count is actually the only decision.
+> RAM allocation is currently determined based on vCore count
+
+Configuration example from Azure Portal:
+
+<p align="center">
+  <img src="img/cpg-nodes-and-ram.png" width="40%">
+</p>
 
 ---
 
@@ -59,6 +70,9 @@ You’d rather want to run the **performance PoC** as described in #1 to underst
 
 The primary reason for it is that most workloads come from a single node (Postgres or non-Postgres) setup and IOPS in a single node configuration are not exactly the same as IOPs in a distributed Postgres DB. Once you determine the optimal cluster configuration for a workload, you can calculate aggregated IOPS on all worker nodes.
 
+References:
+- [Azure Cosmos DB for PostgreSQL compute and storage](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/resources-compute)
+- [Maximum IOPS for your compute / storage configuration](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/resources-compute#maximum-iops-for-your-compute--storage-configuration)
 ---
 
 #### 6) Guidance for initial scale settings
@@ -69,7 +83,7 @@ See 1) above.
 
 #### Other Items
 
-Reference:
+References:
 - [Azure Cosmos DB for PostgreSQL documentation Home](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/)
 - [PostgreSQL extensions in Azure Cosmos DB for PostgreSQL](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-extensions)
 - [Azure Cosmos DB for PostgreSQL limits](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-limits)

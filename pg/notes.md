@@ -70,7 +70,7 @@ PostgreSQL and Citus should be a good starting point.
 
 ---
 
-#### 5) Disks and storage - How many IOPS, and is it RAID or clustered
+#### 5) Disks and storage - How many IOPS
 
 IOPS on its own is not a reliable indicator in case of Azure Cosmos DB for PostgreSQL.
 
@@ -97,6 +97,8 @@ References:
 - [Azure Cosmos DB for PostgreSQL limits](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-limits)
 - [Azure Cosmos DB for PostgreSQL distributed SQL API](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/reference-overview)
 - [PgBouncer Connection pooling in Azure Cosmos DB for PostgreSQL](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-connection-pool)
+- [High availability in Azure Cosmos DB for PostgreSQL](https://learn.microsoft.com/en-us/azure/cosmos-db/postgresql/concepts-high-availability)
+- [SLA](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services)
 
 ----
 
